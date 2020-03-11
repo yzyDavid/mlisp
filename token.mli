@@ -1,8 +1,11 @@
-type t
+type bracket = Left | Right
 
-type bracket
+type operator = Add | Minus | Multiply | Divide
 
-type operator
+type t =
+  Bracket of bracket
+| Op of operator
+| Value of int
                      
 val of_raw_token : RawToken.t -> t
 

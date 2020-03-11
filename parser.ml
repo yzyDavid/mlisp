@@ -1,15 +1,15 @@
 open Core
 
-(** '(' '+' . Value Value ')' *)
+(** '(' '+' . Node Node ')' *)
 let rec make_add toks =
   match toks with
   | [] -> failwith "too short"
   | [fst] -> failwith "too short"
-  | tok :: rest -> let (node, tail) = make_tree rest in
+  | l -> let (node, tail) = make_tree l in
                    match tail with
                    | [] -> failwith "too short"
-                   | tok :: rest -> let (node2, tail2) = make_tree rest in
-                                    Node.Op (Token.Add, node, node2), tail2
+                   | l2 -> let (node2, tail2) = make_tree l2 in
+                           Node.Op (Token.Add, node, node2), tail2
 
 (** '(' . <unknown> *)
 and make_sexp toks =

@@ -1,7 +1,7 @@
 all: test
 
 mlisp: *.ml *.mli
-	corebuild main.native && mv main.native mlisp
+	corebuild -pkg yojson main.native && mv main.native mlisp
 
 test: mlisp
 	./mlisp

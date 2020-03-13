@@ -3,3 +3,5 @@ type t =
 | Value of int
 
 type tree = t
+
+val to_json : t -> Yojson.t

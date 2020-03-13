@@ -9,4 +9,6 @@ let () =
   printf "\nparse result:\n";
   let parsed = Parser.parse tokenized in
   let json = Node.to_json parsed in
-  printf "%s" (Yojson.pretty_to_string json)
+  printf "%s" (Yojson.pretty_to_string json);
+  let result = Eval.eval parsed in
+  printf "\neval result: %i\n" result

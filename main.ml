@@ -1,6 +1,6 @@
 open Core
 
-let inp = "(+ 1 2)"
+let inp = "(+ (+ 2 3) 7)"
 
 let () =
   let tokenized = Lexer.tokenize inp in

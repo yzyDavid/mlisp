@@ -1,7 +1,7 @@
 open Core
 
-(** '(' '+' . Node Node ')' *)
-let rec make_add toks =
+(** '(' '+' | '-' | '*' | '/' . Node Node ')' *)
+let rec make_op opTok toks =
   match toks with
   | [] -> failwith "too short"
   | [_] -> failwith "too short"
@@ -9,7 +9,7 @@ let rec make_add toks =
                    match tail with
                    | [] -> failwith "too short"
                    | l2 -> let (node2, tail2) = make_tree l2 in
-                           Node.Op (Token.Add, node, node2), tail2
+                           Node.Op (opTok, node, node2), tail2
 
 (** '(' . <unknown> *)
 and make_sexp toks =
@@ -17,7 +17,7 @@ and make_sexp toks =
   | [] -> failwith "expect operator"
   | tok :: rest ->
      match tok with
-     | Token.Op Token.Add -> let (node, tail) = make_add rest in
+     | Token.Op opTok -> let (node, tail) = make_op opTok rest in
                              (match tail with
                              | (Token.Bracket Token.Right) :: tail_of_me -> node, tail_of_me
                              | _ -> failwith "error on making S-exp")
